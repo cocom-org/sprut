@@ -1,12 +1,19 @@
-# Cygwin can not find dll without changing PATH
-PATH := ${PATH}:../AMMUNITION/.libs
+AUTOMAKE_OPTIONS = subdir-objects
 
 bin_PROGRAMS = sprut
-sprut_SOURCES = anal.c gen.c tab.c main.c common.c anal.h gen.h tab.h common.h yacc.h
+sprut_SOURCES = anal.c gen.c tab.c main.c common.c anal.h gen.h tab.h common.h yacc.h \
+  AMMUNITION/objstack.c \
+  AMMUNITION/position.c \
+  AMMUNITION/allocate.c \
+  AMMUNITION/errors.c \
+  AMMUNITION/vlobject.c \
+  AMMUNITION/hashtab.c \
+  AMMUNITION/commline.c
+
 nodist_sprut_SOURCES = yacc.c ird.c ird.h A1_base.sprut A1_syntax.sprut A1_value.sprut A1_test.sprut
 CLEANFILES = yacc.c ird.c ird.h A1_base.sprut A1_syntax.sprut A1_value.sprut A1_test.sprut
-sprut_CFLAGS = -I$(srcdir)/../AMMUNITION
-sprut_LDFLAGS = -static ../AMMUNITION/libcocom.la
+sprut_CFLAGS = -I$(srcdir)/AMMUNITION
+sprut_LDFLAGS = -static
 dist_doc_DATA = sprut.txt sprut.info sprut.html sprut-1.html sprut-2.html sprut-3.html sprut-4.html sprut-5.html\
 	        sprut.pdf sprut.dvi sprut.ps
 dist_man_MANS = sprut.1
